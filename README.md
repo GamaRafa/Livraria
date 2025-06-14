@@ -1,18 +1,30 @@
-## Getting Started
+# Engenharia de Software 2
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+## Engenharia Reversa
 
-## Folder Structure
+Projeto acadêmico de simulação de uma livraria online utilizando Java e o padrão de arquitetura MVC (Model-View-Controller).
 
-The workspace contains two folders by default, where:
+## 📚 Sobre o Projeto
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+Este sistema simula o funcionamento básico de uma livraria, incluindo:
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+- Gerenciamento de livros (cadastro, edição e remoção)
+- Gerenciamento de carrinho de compras
+- Simulação de compra por parte do cliente
+- Separação clara entre Model, Service e camada de dados (arquivos `.txt`)
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+O projeto foi desenvolvido com fins didáticos para a disciplina de Engenharia de Software 2
 
-## Dependency Management
+## 🗂️ Estrutura de Pacotes
 
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+```
+com.livraria.model // Classes de domínio como Livro e ItemCarrinho
+com.livraria.service // Lógica de negócio como GerenciadorLivros e CarrinhoDeCompras
+com.livraria.data // Leitura e escrita em arquivos txt
+com.livraria // Classe principal (MainApp)
+```
+
+## 🔒 Acesso ao Projeto
+Este projeto é somente leitura para colegas de classe.
+Caso queira sugerir melhorias, faça um fork e abra uma Pull Request.
+Contribuições diretas ao repositório original estão desabilitadas.
