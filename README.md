@@ -24,6 +24,35 @@ com.livraria.data // Leitura e escrita em arquivos txt
 com.livraria // Classe principal (MainApp)
 ```
 
+## 🗂️ Estrutura de Pastas
+
+```
+|- src/
+| |- com
+| | |- livraria
+| | | |- data
+| | | | └──
+
+
+livraria/
+├── livros.txt
+└── src/
+    └── com/
+        └── livraria/
+            ├── MainApp.java           # Classe principal
+            ├── model/                 # Camada de modelo (entidades)
+            │   ├── Livro.java
+            │   └── ItemCarrinho.java
+            ├── service/               # Lógica de negócio
+            │   ├── CarrinhoDeCompras.java
+            │   └── GerenciadorLivros.java
+            └── data/                  # Acesso a arquivos
+                └── DadosLivraria.java
+└── data
+  ├── livros.txt
+  ├── carrinho_atual.txt
+  ```
+
 ## 🔒 Acesso ao Projeto
 Este projeto é somente leitura para colegas de classe.
 Caso queira sugerir melhorias, faça um fork e abra uma Pull Request.
