@@ -1,0 +1,80 @@
+@startuml classes
+class Livro {
+  - String isbn
+  - String titulo
+  - String autor
+  - String categoria
+  - double preco
+  - int estoque
+  
+  + Livro(String isbn, String titulo, String autor, String categoria, double preco, int estoque)
+  
+  + String getIsbn()
+  + String getTitulo()
+  + String getAutor()
+  + String getCategoria()
+  + double getPreco()
+  + int getEstoque()
+
+  + setPreco(double preco)
+  + setEstoque(int estoque)
+
+  + public String toString()
+}
+
+class ItemCarrinho {
+  - Livro livro
+  - int quantidade
+  
+  + ItemCarrinho(Livro livro, int quantidade)
+  
+  + Livro getLivro()
+  + int getQuantidade()
+
+  + setQuantidade(int quantidade)
+  
+  + double getSubTotal()
+  + String toString()
+}
+
+class GerenciadorDeLivros {
+  - List<Livro> livros;
+
+  + GerenciadorDeLivros()
+  'this.livros = DadosLivraria.carregarLivros(); representar no relacionamento
+  
+  + List<Livro> getTodosLivros()
+  + Optional<Livro> buscarLivroPorIsbn(Strin isbn)
+  + List<Livro> buscarLivrosPorTitulo(String termo)
+  + void adicionarLivro(Livro novoLivro)
+  + boolean atualizarLivro(String isbn, double novoPreco, int novoEstoque)
+  + boolean removerLivro(String isbn)
+}
+
+class CarrinhoDeCompras {
+  - List<ItemCarrinho> itens
+  - GerenciadorDeLivros gerenciadorDeLivros
+
+  + CarrinhoDeCompras(GerenciadorDeLivros gerenciadorDeLivros)
+  'this.itens = DadosLivraria.carregarCarrinho(gerenciadorDeLivros.getTodosLivros()); representar no relacionamento
+
+  + List<ItemCarrinho> getItens()
+  
+  + void adicionarItem(String isbn, int quantidade)
+  + void removerItem(String isbn)
+  + void atualizarQuantidadeItem(String isbn, int novaQuantidade)
+  + double calcularTotal()
+  + void exibirCarrinho()
+  + void finalizarCompra()
+}
+
+class DadosLivraria {
+  - {static} String ARQUIVO_LIVROS
+  - {static} String ARQUIVO_CARRINHO
+
+  + {static} List<Livro> carregarLivros()
+  + {static} void salvarLivros(List<Livro> livros)
+  + {static} List<ItemCarrinho> carregarCarrinho(List<Livro> todosLivros)
+  + {static} void salvarCarrinho(List<ItemCarrinho> carrinho)
+}
+@enduml
