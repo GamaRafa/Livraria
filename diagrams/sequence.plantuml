@@ -1,0 +1,58 @@
+@startuml sequence
+actor Cliente
+participant Interface
+control CarrinhoDeCompras
+control GerenciadorDeLivros
+database DadosLivraria
+
+Cliente -> Interface : cliente finaliza a compra
+activate Interface
+Interface -> CarrinhoDeCompras : interface chama \nserviço CarrinhoDeCompras
+activate CarrinhoDeCompras
+CarrinhoDeCompras -> GerenciadorDeLivros : construtor de CarrinhoDeCompras \nchama serviço GerenciadorDeLivros
+activate GerenciadorDeLivros
+CarrinhoDeCompras -> DadosLivraria : construtor de CarrinhoDeCompras \nchama DadosLivraria para bucar \ntodos os livros
+activate DadosLivraria
+DadosLivraria -> CarrinhoDeCompras : retorna o carrinho e seus livros
+
+alt carrinho está vazio
+CarrinhoDeCompras -> Interface
+Interface -> Cliente : "Não há itens para finalizar a compra"
+end
+
+Interface -> Cliente : "Finalizando compra..."
+CarrinhoDeCompras -> GerenciadorDeLivros : atualizarLivro()
+CarrinhoDeCompras -> CarrinhoDeCompras : itens.clear() \nesvazia o carrinho
+activate CarrinhoDeCompras
+deactivate CarrinhoDeCompras
+
+CarrinhoDeCompras -> DadosLivraria : salvarCarrinho() \nsalva o carrinho vazio
+Interface -> Cliente : "Compra finalizada com sucesso! \nSeu carrinho foi esvaziado"
+
+deactivate Cliente
+deactivate Interface
+deactivate CarrinhoDeCompras
+deactivate GerenciadorDeLivros
+deactivate DadosLivraria
+@enduml
+
+' public CarrinhoDeCompras(GerenciadorDeLivros gerenciadorDeLivros) {
+'   this.gerenciadorDeLivros = gerenciadorDeLivros;
+'   this.itens = DadosLivraria.carregarCarrinho(gerenciadorDeLivros.getTodosLivros());
+' }
+
+' public void finalizarCompra() {
+'   if (itens.isEmpty()) {
+'     System.out.println("Não há itens para finalizar a compra");
+'     return;
+'   }
+
+'   System.out.println("\nFinalizando compra...");
+'   for (ItemCarrinho item : itens) {
+'     Livro livro = item.getLivro();
+'     gerenciadorDeLivros.atualizarLivro(livro.getIsbn(), livro.getPreco(), livro.getEstoque() - item.getQuantidade());
+'   }
+'   itens.clear();
+'   DadosLivraria.salvarCarrinho(itens);
+'   System.out.println("Compra finalizada com sucesso! Seu carrinho foi esvaziado");
+' }
