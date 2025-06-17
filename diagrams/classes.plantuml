@@ -1,4 +1,5 @@
 @startuml classes
+left to right direction
 class Livro {
   - String isbn
   - String titulo
@@ -77,4 +78,14 @@ class DadosLivraria {
   + {static} List<ItemCarrinho> carregarCarrinho(List<Livro> todosLivros)
   + {static} void salvarCarrinho(List<ItemCarrinho> carrinho)
 }
+
+'1 Livro existe independente de pertencer a um ItemCarrinho, e pode pertencer a vários (ou nenhum) ItemCarrinho
+Livro "1" -- "0..*" ItemCarrinho : pertence a \n(associação)
+'1 CarrinhoDeCompras pode possuir nenhum ou vários ItemCarrinho, que só podem pertencer a um CarrinhoDeCompras,
+'pois cada item tem o seu Livro e sua quantidade, não fazendo sentido que um ItemCarrinho se repita
+CarrinhoDeCompras "1" *-- "0..*" ItemCarrinho : pertence a \n(agregação)
+'DadosLivraria é uma dependência do construtor de GerenciadorLivros
+GerenciadorDeLivros --> DadosLivraria : (dependência)
+'DadosLivraria é uma dependência do construtor de CarrinhoDeCompras
+CarrinhoDeCompras --> DadosLivraria : (dependência)
 @enduml

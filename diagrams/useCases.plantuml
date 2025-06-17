@@ -1,0 +1,27 @@
+@startuml useCases
+left to right direction
+
+actor Administrador
+actor Cliente
+
+(Exibir Livros) as getBooks
+(Adicionar Livro) as addLivro
+(Atualizar preço e estoque) as updateBook
+(Remover um Livro) as deleteBook
+
+(Adicionar item ao Carrinho) as addToCart
+(Exibir Carrinho) as showCart
+(Atualizar quantidade de item) as updateItem
+(Remover item do Carrinho) as removeFromCart
+(Finalizar compra) as endPurchase
+
+Administrador -- addLivro
+Administrador -- updateBook
+Administrador -- deleteBook
+Administrador -- getBooks
+Cliente -- addToCart
+Cliente -- showCart
+Cliente -- updateItem
+Cliente -- removeFromCart
+Cliente -- endPurchase
+@enduml
