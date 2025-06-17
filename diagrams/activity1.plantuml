@@ -1,0 +1,22 @@
+@startuml activity1
+title "Adicionar Livro";
+start
+:Adicionar Livro;
+if (livro está cadastrado) then (não)
+  : salvar livro no banco de dados;
+  : "Livro adicionado: <nome do livro>";
+else (sim)
+  : "Erro: Livro com ISBN <ISBN do livro> já existe";
+endif
+stop
+@enduml
+
+' public void adicionarLivro(Livro novoLivro) {
+'   if (!buscarLivroPorIsbn(novoLivro.getIsbn()).isPresent()) {
+'     livros.add(novoLivro);
+'     DadosLivraria.salvarLivros(livros);
+'     System.out.println("Livro adicionado: " + novoLivro.getTitulo());
+'   } else {
+'     System.out.println("Erro: Livro com ISBN " + novoLivro.getIsbn() + " já existe");
+'   }
+' }
