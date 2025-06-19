@@ -1,0 +1,23 @@
+@startuml activity3
+title "Adicionar item ao carrinho";
+start
+: Adicionar item ao carrinho;
+:buscar livro pelo ISBN;
+if (livro existe) then (sim)
+  if (estoque do livro >= quantidade adicionada ao carrinho) then (sim)
+    :buscar item no carrinho pelo ISBN do livro;
+    if (livro já está no carrinho) then (sim)
+      : alterar quantidade do livro no carrinho para a \nquantidade antiga + quantidade informada;
+    else (não)
+      : livro é adicionado ao carrinho \ncom a quantidade informada;
+    endif
+    :"<quantidade>x <titulo do livro> adicionado ao carrinho";
+    :carrinho com os itens é salvo;
+  else (não)
+    :"Estoque insuficiente para <titulo do livro>. \nDisponível: <estoque do livro>";
+  endif
+else (não);
+  :"Livro com ISBN <isbn> não encontrado;
+endif
+stop
+@enduml
