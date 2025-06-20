@@ -1,0 +1,60 @@
+@startuml sequence2
+title "Adicionar item ao carrinho"
+actor Cliente
+participant Interface
+control CarrinhoDeCompras
+control GerenciadorDeLivros
+database DadosLivraria
+
+Cliente -> Interface : cliente adiciona \num item ao carrinho
+'construtor da classe CarrinhoDeCompras
+activate Interface
+Interface -> CarrinhoDeCompras : classe carrinho de compras \né chamada instanciando \nGerenciadorDeLivros e DadosLivraria
+activate CarrinhoDeCompras
+CarrinhoDeCompras -> GerenciadorDeLivros
+activate GerenciadorDeLivros
+CarrinhoDeCompras -> DadosLivraria
+activate DadosLivraria
+CarrinhoDeCompras -> DadosLivraria : serviço busca no banco de dados \ntodos os itens do carrinho
+create entity ItemCarrinho
+DadosLivraria -> ItemCarrinho
+ItemCarrinho --> DadosLivraria : itens \n(List<ItemCarrinho>)
+DadosLivraria -->CarrinhoDeCompras : itens
+deactivate DadosLivraria
+|||
+'lógica do método adicionarItem
+CarrinhoDeCompras -> GerenciadorDeLivros : buscar livro \npelo ISBN
+alt livro encontrado
+  create entity Livro
+  GerenciadorDeLivros -> Livro
+  Livro --> GerenciadorDeLivros : livro
+  GerenciadorDeLivros --> CarrinhoDeCompras : livro
+    alt estoque do livro >= quantidade do item a ser adicionado
+      CarrinhoDeCompras -> CarrinhoDeCompras : verificar se livro \njá está no carrinho
+      activate CarrinhoDeCompras
+      deactivate CarrinhoDeCompras
+      alt livro já está no carrinho
+        CarrinhoDeCompras -> ItemCarrinho : atualizar quantidade com \nquantidade antiga + quantidade nova
+      else livro não está no carrinho
+        CarrinhoDeCompras -> CarrinhoDeCompras : adicionar item com \na quantidade informada
+        activate CarrinhoDeCompras
+        deactivate CarrinhoDeCompras
+      end
+      CarrinhoDeCompras -> Interface
+      Interface -> Cliente : "<quantidade>x <titulo do livro> \nadicionado ao carrinho"
+      CarrinhoDeCompras -> DadosLivraria : salvar carrinho com os itens
+      activate DadosLivraria
+      deactivate DadosLivraria
+    else estoque insuficiente
+    CarrinhoDeCompras -> Interface
+    Interface -> Cliente : "Estoque insuficiente para \n<titulo do livro>. \nDisponível <estoque do livro>"
+    end
+else livro não encontrado
+GerenciadorDeLivros -> CarrinhoDeCompras
+deactivate GerenciadorDeLivros
+CarrinhoDeCompras -> Interface
+deactivate CarrinhoDeCompras
+Interface -> Cliente : "Livro com ISBN <isbn> não encontrado"
+deactivate Interface
+end
+@enduml
