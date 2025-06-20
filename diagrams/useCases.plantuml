@@ -38,5 +38,3 @@ rectangle "Sistema Livraria" {
   deleteBook ..> getBooks : <<extend>>
 }
 @enduml
-
-'revisar diagrama de caso de uso

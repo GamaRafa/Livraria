@@ -35,24 +35,3 @@ deactivate CarrinhoDeCompras
 deactivate GerenciadorDeLivros
 deactivate DadosLivraria
 @enduml
-
-' public CarrinhoDeCompras(GerenciadorDeLivros gerenciadorDeLivros) {
-'   this.gerenciadorDeLivros = gerenciadorDeLivros;
-'   this.itens = DadosLivraria.carregarCarrinho(gerenciadorDeLivros.getTodosLivros());
-' }
-
-' public void finalizarCompra() {
-'   if (itens.isEmpty()) {
-'     System.out.println("Não há itens para finalizar a compra");
-'     return;
-'   }
-
-'   System.out.println("\nFinalizando compra...");
-'   for (ItemCarrinho item : itens) {
-'     Livro livro = item.getLivro();
-'     gerenciadorDeLivros.atualizarLivro(livro.getIsbn(), livro.getPreco(), livro.getEstoque() - item.getQuantidade());
-'   }
-'   itens.clear();
-'   DadosLivraria.salvarCarrinho(itens);
-'   System.out.println("Compra finalizada com sucesso! Seu carrinho foi esvaziado");
-' }

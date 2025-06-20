@@ -23,26 +23,3 @@ else (não)
 endif
 stop
 @enduml
-
-' public void atualizarQuantidadeItem(String isbn, int novaQuantidade) {
-'   if (novaQuantidade <= 0) {
-'     removerItem(isbn);
-'     return;
-'   }
-
-'   Optional<ItemCarrinho> itemOpt = itens.stream()
-'     .filter(item -> item.getLivro().getIsbn().equals(isbn))
-'     .findFirst();
-'   if (itemOpt.isPresent()) {
-'     ItemCarrinho item = itemOpt.get();
-'     if (item.getLivro().getEstoque() >= novaQuantidade) {
-'       item.setQuantidade(novaQuantidade);
-'       System.out.println("Quantidade de " + item.getLivro().getTitulo() + " atualizado para " + novaQuantidade);
-'       DadosLivraria.salvarCarrinho(itens);
-'     } else {
-'       System.out.println("Estoque insuficiente para " + item.getLivro().getTitulo() + ". Disponível: " + item.getLivro().getEstoque());
-'     }
-'   } else {
-'     System.out.println("Item com ISBN " + isbn + " não encontrado no carrinho");
-'   }
-' }

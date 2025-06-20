@@ -10,13 +10,3 @@ else (sim)
 endif
 stop
 @enduml
-
-' public void adicionarLivro(Livro novoLivro) {
-'   if (!buscarLivroPorIsbn(novoLivro.getIsbn()).isPresent()) {
-'     livros.add(novoLivro);
-'     DadosLivraria.salvarLivros(livros);
-'     System.out.println("Livro adicionado: " + novoLivro.getTitulo());
-'   } else {
-'     System.out.println("Erro: Livro com ISBN " + novoLivro.getIsbn() + " já existe");
-'   }
-' }
