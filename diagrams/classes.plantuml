@@ -45,7 +45,7 @@ class GerenciadorDeLivros {
   'this.livros = DadosLivraria.carregarLivros(); representar no relacionamento
   
   + List<Livro> getTodosLivros()
-  + Optional<Livro> buscarLivroPorIsbn(Strin isbn)
+  + Optional<Livro> buscarLivroPorIsbn(String isbn)
   + List<Livro> buscarLivrosPorTitulo(String termo)
   + void adicionarLivro(Livro novoLivro)
   + boolean atualizarLivro(String isbn, double novoPreco, int novoEstoque)
@@ -88,4 +88,5 @@ CarrinhoDeCompras "1" *-- "0..*" ItemCarrinho : pertence a \n(agregação)
 GerenciadorDeLivros --> DadosLivraria : (dependência)
 'DadosLivraria é uma dependência do construtor de CarrinhoDeCompras
 CarrinhoDeCompras --> DadosLivraria : (dependência)
+CarrinhoDeCompras -> GerenciadorDeLivros : (dependência)
 @enduml

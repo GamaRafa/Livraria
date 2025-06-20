@@ -1,40 +1,33 @@
 @startuml useCases
 left to right direction
-
 actor Administrador
 actor Cliente
 
 rectangle "Sistema Livraria" {
-  (Exibir Livros) as getBooks
-  (Adicionar Livro) as addLivro
-  (Atualizar preço e estoque) as updateBook
-  (Remover um Livro) as deleteBook
+  (Listar livros disponíveis) as showBooks
+  (Adicionar livro) as addBook
+  (Atualizar preço e estoque de livro) as updateBook
+  (Remover livro) as deleteBook
 
-  (Adicionar item ao Carrinho) as addToCart
   (Exibir Carrinho) as showCart
-  (Atualizar quantidade de item) as updateItem
+  (Adicionar item ao Carrinho) as addToCart
+  (Atualizar quantidade do item) as updateItem
   (Remover item do Carrinho) as removeFromCart
   (Finalizar compra) as endPurchase
+  'caso não visível ao usuário, mas usado internamente
+  (Calcular total) as calculateTotal
 
-  Administrador -- addLivro
+  Administrador -- showBooks
+  Administrador -- addBook
   Administrador -- updateBook
   Administrador -- deleteBook
-  Administrador -- getBooks
 
-
-  Cliente -- addToCart
   Cliente -- showCart
+  Cliente -- addToCart
   Cliente -- updateItem
   Cliente -- removeFromCart
   Cliente -- endPurchase
 
-  endPurchase ..> showCart : <<include>>
-  addToCart ..> showCart : <<extend>>
-  updateItem ..> showCart : <<extend>>
-  removeFromCart ..> showCart : <<extend>>
-
-  addLivro ..> getBooks : <<extend>>
-  updateBook ..> getBooks : <<extend>>
-  deleteBook ..> getBooks : <<extend>>
+  showCart -- calculateTotal : <<include>>
 }
 @enduml
